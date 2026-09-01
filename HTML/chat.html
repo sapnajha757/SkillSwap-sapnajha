@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Chat | SkillSwap</title>
+
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/navbar.css">
+    <link rel="stylesheet" href="../CSS/components.css">
+
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Skill<span>Swap</span>
+        </div>
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="browse.html">
+                Browse Skills
+            </a>
+
+            <a href="profile.html">
+                My Profile
+            </a>
+
+            <a href="swap-request.html">
+                Swap Requests
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================
+         CHAT SECTION
+    ========================== -->
+
+    <main class="chat-section">
+
+        <div class="chat-container">
+
+
+            <!-- =====================
+                 CHAT HEADER
+            ====================== -->
+
+            <div class="chat-header">
+
+                <div class="profile-avatar">
+                    A
+                </div>
+
+                <div>
+
+                    <h2 id="chat-user-name">
+                        Aarav Sharma
+                    </h2>
+
+                    <p id="chat-user-status">
+                        Skill Swap Partner
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =====================
+                 MESSAGES
+            ====================== -->
+
+            <div
+                id="messages-container"
+                class="messages-container"
+            >
+
+                <!-- Messages will be added by JavaScript -->
+
+            </div>
+
+
+
+            <!-- =====================
+                 MESSAGE INPUT
+            ====================== -->
+
+            <form
+                id="chat-form"
+                class="chat-form"
+            >
+
+                <input
+                    type="text"
+                    id="message-input"
+                    placeholder="Type your message..."
+                    autocomplete="off"
+                    required
+                >
+
+                <button
+                    type="submit"
+                    class="btn primary-btn"
+                >
+                    Send
+                </button>
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- JavaScript -->
+
+    <script src="../JAVASCRIPT/chat.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ratings | SkillSwap</title>
+
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/navbar.css">
+    <link rel="stylesheet" href="../CSS/components.css">
+
+</head>
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Skill<span>Swap</span>
+        </div>
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="browse.html">
+                Browse Skills
+            </a>
+
+            <a href="profile.html">
+                My Profile
+            </a>
+
+            <a href="chat.html">
+                Chat
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================
+         RATINGS SECTION
+    ========================== -->
+
+    <main class="auth-section">
+
+        <div class="auth-container">
+
+
+            <!-- Header -->
+
+            <div class="auth-header">
+
+                <p class="auth-tagline">
+                    BUILD TRUST
+                </p>
+
+                <h1>
+                    Rate Your <span>SkillSwap</span>
+                </h1>
+
+                <p>
+                    How was your experience with your skill partner?
+                </p>
+
+            </div>
+
+
+
+            <!-- Partner -->
+
+            <div class="selected-user">
+
+                <div class="profile-avatar">
+                    A
+                </div>
+
+                <div>
+
+                    <h3>
+                        Aarav Sharma
+                    </h3>
+
+                    <p>
+                        Skill Swap Partner
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Rating Form -->
+
+            <form id="rating-form">
+
+
+                <!-- Rating -->
+
+                <div class="form-group">
+
+                    <label for="rating">
+                        Your Rating
+                    </label>
+
+                    <select id="rating" required>
+
+                        <option value="">
+                            Select rating
+                        </option>
+
+                        <option value="5">
+                            ⭐⭐⭐⭐⭐ — Excellent
+                        </option>
+
+                        <option value="4">
+                            ⭐⭐⭐⭐ — Very Good
+                        </option>
+
+                        <option value="3">
+                            ⭐⭐⭐ — Good
+                        </option>
+
+                        <option value="2">
+                            ⭐⭐ — Needs Improvement
+                        </option>
+
+                        <option value="1">
+                            ⭐ — Poor
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- Review -->
+
+                <div class="form-group">
+
+                    <label for="review">
+                        Write a Review
+                    </label>
+
+                    <textarea
+                        id="review"
+                        rows="5"
+                        placeholder="Tell others about your experience..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+
+                <!-- Submit -->
+
+                <button
+                    type="submit"
+                    class="btn primary-btn auth-btn"
+                >
+                    Submit Rating
+                </button>
+
+
+
+                <!-- Success Message -->
+
+                <p id="rating-message"></p>
+
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+
+    <script src="../JAVASCRIPT/ratings.js"></script>
+
+</body>
+
+</html>

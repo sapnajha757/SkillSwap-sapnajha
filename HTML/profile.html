@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | SkillSwap</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/navbar.css">
+    <link rel="stylesheet" href="../CSS/components.css">
+
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Skill<span>Swap</span>
+        </div>
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="browse.html">
+                Browse Skills
+            </a>
+
+            <a href="profile.html">
+                My Profile
+            </a>
+
+            <a href="login.html">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         PROFILE SECTION
+    ========================== -->
+
+    <main class="profile-section">
+
+        <div class="profile-container">
+
+            <!-- Profile Header -->
+
+            <div class="profile-header">
+
+                <div class="profile-avatar">
+                    V
+                </div>
+
+                <div>
+
+                    <h1 id="profile-name">
+                        Your Name
+                    </h1>
+
+                    <p id="profile-email">
+                        your@email.com
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Profile Form -->
+
+            <form id="profile-form">
+
+
+                <!-- Full Name -->
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Bio -->
+
+                <div class="form-group">
+
+                    <label for="bio">
+                        About You
+                    </label>
+
+                    <textarea
+                        id="bio"
+                        rows="4"
+                        placeholder="Tell people a little about yourself..."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- Skills to Teach -->
+
+                <div class="form-group">
+
+                    <label for="teach-skills">
+                        Skills I Can Teach
+                    </label>
+
+                    <input
+                        type="text"
+                        id="teach-skills"
+                        placeholder="e.g. HTML, CSS, JavaScript"
+                    >
+
+                    <small>
+                        Separate multiple skills with commas.
+                    </small>
+
+                </div>
+
+
+                <!-- Skills to Learn -->
+
+                <div class="form-group">
+
+                    <label for="learn-skills">
+                        Skills I Want to Learn
+                    </label>
+
+                    <input
+                        type="text"
+                        id="learn-skills"
+                        placeholder="e.g. React, Python, UI/UX"
+                    >
+
+                    <small>
+                        Separate multiple skills with commas.
+                    </small>
+
+                </div>
+
+
+                <!-- Location -->
+
+                <div class="form-group">
+
+                    <label for="location">
+                        Location
+                    </label>
+
+                    <input
+                        type="text"
+                        id="location"
+                        placeholder="e.g. Delhi, India"
+                    >
+
+                </div>
+
+
+                <!-- Save Button -->
+
+                <button
+                    type="submit"
+                    class="btn primary-btn auth-btn"
+                >
+                    Save Profile
+                </button>
+
+
+                <!-- Message -->
+
+                <p id="profile-message"></p>
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+    <!-- JavaScript -->
+
+    <script src="../JAVASCRIPT/profile.js"></script>
+
+</body>
+
+</html>

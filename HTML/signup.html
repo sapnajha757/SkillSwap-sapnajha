@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sign Up | SkillSwap</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/navbar.css">
+    <link rel="stylesheet" href="../CSS/components.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Skill<span>Swap</span>
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="browse.html">
+                Browse Skills
+            </a>
+
+            <a href="login.html">
+                Login
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================
+         SIGNUP SECTION
+    ========================== -->
+
+    <main class="auth-section">
+
+        <div class="auth-container">
+
+
+            <!-- Header -->
+
+            <div class="auth-header">
+
+                <p class="auth-tagline">
+                    JOIN THE COMMUNITY
+                </p>
+
+                <h1>
+                    Create Your <span>SkillSwap</span> Account
+                </h1>
+
+                <p>
+                    Share what you know and discover what you can learn.
+                </p>
+
+            </div>
+
+
+
+            <!-- Signup Form -->
+
+            <form id="signup-form">
+
+
+                <!-- Full Name -->
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your full name"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- Email -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- Password -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Create a password"
+                        minlength="6"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- Confirm Password -->
+
+                <div class="form-group">
+
+                    <label for="confirm-password">
+                        Confirm Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirm-password"
+                        name="confirm-password"
+                        placeholder="Confirm your password"
+                        minlength="6"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- Terms -->
+
+                <div class="remember-me">
+
+                    <input
+                        type="checkbox"
+                        id="terms"
+                        name="terms"
+                        required
+                    >
+
+                    <label for="terms">
+                        I agree to the SkillSwap terms and conditions.
+                    </label>
+
+                </div>
+
+
+
+                <!-- Signup Button -->
+
+                <button
+                    type="submit"
+                    class="btn primary-btn auth-btn"
+                >
+                    Create Account
+                </button>
+
+
+
+                <!-- Message -->
+
+                <p id="auth-message"></p>
+
+
+            </form>
+
+
+
+            <!-- Divider -->
+
+            <div class="auth-divider">
+
+                <span>OR</span>
+
+            </div>
+
+
+
+            <!-- Login -->
+
+            <div class="auth-footer">
+
+                <p>
+                    Already have an account?
+                    <a href="login.html">
+                        Login here
+                    </a>
+                </p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- JavaScript -->
+
+    <script src="../JAVASCRIPT/auth.js"></script>
+
+</body>
+
+</html>

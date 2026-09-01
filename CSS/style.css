@@ -1,0 +1,208 @@
+/* =========================
+   GLOBAL STYLES
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #1f2937;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+section {
+    padding: 80px 8%;
+}
+
+
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero {
+    min-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #f8fafc;
+}
+
+.hero-content {
+    max-width: 850px;
+}
+
+.hero-tagline {
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: 64px;
+    line-height: 1.1;
+    margin-bottom: 25px;
+}
+
+.hero h1 span {
+    color: #4f46e5;
+}
+
+.hero-description {
+    max-width: 650px;
+    margin: 0 auto 35px;
+    font-size: 18px;
+    color: #64748b;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn {
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.primary-btn {
+    background-color: #4f46e5;
+    color: white;
+}
+
+.primary-btn:hover {
+    background-color: #3730a3;
+}
+
+.secondary-btn {
+    border: 1px solid #cbd5e1;
+    background-color: white;
+}
+
+.secondary-btn:hover {
+    background-color: #f1f5f9;
+}
+
+
+/* =========================
+   PROBLEM SECTION
+========================= */
+
+.problem {
+    text-align: center;
+}
+
+.problem h2 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.problem p {
+    max-width: 700px;
+    margin: auto;
+    color: #64748b;
+    font-size: 17px;
+}
+
+
+/* =========================
+   HOW IT WORKS
+========================= */
+
+.how-it-works {
+    background-color: #f8fafc;
+    text-align: center;
+}
+
+.how-it-works h2 {
+    font-size: 40px;
+    margin-bottom: 50px;
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.step {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: left;
+    border: 1px solid #e2e8f0;
+}
+
+.step h3:first-child {
+    color: #4f46e5;
+    margin-bottom: 15px;
+}
+
+.step p {
+    color: #64748b;
+    margin-top: 10px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    padding: 25px;
+    text-align: center;
+    background-color: #111827;
+    color: white;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 800px) {
+
+    .hero h1 {
+        font-size: 45px;
+    }
+
+    .steps {
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
+
+@media (max-width: 500px) {
+
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .steps {
+        grid-template-columns: 1fr;
+    }
+
+}

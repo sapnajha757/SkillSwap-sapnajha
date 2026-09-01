@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Swap Request | SkillSwap</title>
+
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/navbar.css">
+    <link rel="stylesheet" href="../CSS/components.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Skill<span>Swap</span>
+        </div>
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="browse.html">
+                Browse Skills
+            </a>
+
+            <a href="profile.html">
+                My Profile
+            </a>
+
+            <a href="login.html">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================
+         SWAP REQUEST
+    ========================== -->
+
+    <main class="auth-section">
+
+        <div class="auth-container">
+
+            <div class="auth-header">
+
+                <p class="auth-tagline">
+                    START A SKILL SWAP
+                </p>
+
+                <h1>
+                    Send a <span>Swap Request</span>
+                </h1>
+
+                <p>
+                    Tell your skill partner what you want to learn
+                    and what you can teach in return.
+                </p>
+
+            </div>
+
+
+
+            <!-- Selected User -->
+
+            <div class="selected-user">
+
+                <div class="profile-avatar">
+                    A
+                </div>
+
+                <div>
+
+                    <h3 id="receiver-name">
+                        Aarav Sharma
+                    </h3>
+
+                    <p id="receiver-location">
+                        Delhi
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Swap Form -->
+
+            <form id="swap-form">
+
+
+                <!-- Skill You Want -->
+
+                <div class="form-group">
+
+                    <label for="learn-skill">
+                        What do you want to learn?
+                    </label>
+
+                    <select id="learn-skill" required>
+
+                        <option value="">
+                            Select a skill
+                        </option>
+
+                        <option value="HTML">
+                            HTML
+                        </option>
+
+                        <option value="CSS">
+                            CSS
+                        </option>
+
+                        <option value="JavaScript">
+                            JavaScript
+                        </option>
+
+                        <option value="Python">
+                            Python
+                        </option>
+
+                        <option value="React">
+                            React
+                        </option>
+
+                        <option value="UI/UX">
+                            UI/UX
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- Skill You Offer -->
+
+                <div class="form-group">
+
+                    <label for="teach-skill">
+                        What can you teach in return?
+                    </label>
+
+                    <select id="teach-skill" required>
+
+                        <option value="">
+                            Select a skill
+                        </option>
+
+                        <option value="HTML">
+                            HTML
+                        </option>
+
+                        <option value="CSS">
+                            CSS
+                        </option>
+
+                        <option value="JavaScript">
+                            JavaScript
+                        </option>
+
+                        <option value="Python">
+                            Python
+                        </option>
+
+                        <option value="React">
+                            React
+                        </option>
+
+                        <option value="UI/UX">
+                            UI/UX
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- Message -->
+
+                <div class="form-group">
+
+                    <label for="swap-message">
+                        Message
+                    </label>
+
+                    <textarea
+                        id="swap-message"
+                        rows="5"
+                        placeholder="Introduce yourself and explain what you would like to learn..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+
+                <!-- Submit -->
+
+                <button
+                    type="submit"
+                    class="btn primary-btn auth-btn"
+                >
+                    Send Swap Request
+                </button>
+
+
+
+                <!-- Message -->
+
+                <p id="swap-message-status"></p>
+
+            </form>
+
+
+        </div>
+
+    </main>
+
+
+
+    <script src="../JAVASCRIPT/swaps.js"></script>
+
+</body>
+
+</html>

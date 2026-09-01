@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Browse Skills | SkillSwap</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/navbar.css">
+    <link rel="stylesheet" href="../CSS/components.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Skill<span>Swap</span>
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="browse.html">
+                Browse Skills
+            </a>
+
+            <a href="profile.html">
+                My Profile
+            </a>
+
+            <a href="login.html">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================
+         BROWSE HEADER
+    ========================== -->
+
+    <main class="browse-section">
+
+        <div class="browse-header">
+
+            <p class="auth-tagline">
+                DISCOVER & CONNECT
+            </p>
+
+            <h1>
+                Find Your <span>Skill Partner</span>
+            </h1>
+
+            <p>
+                Discover people who can teach what you want to learn
+                and learn what you already know.
+            </p>
+
+        </div>
+
+
+
+        <!-- =========================
+             SEARCH
+        ========================== -->
+
+        <div class="search-container">
+
+            <input
+                type="text"
+                id="search-input"
+                placeholder="Search by skill, name or location..."
+            >
+
+            <button
+                id="search-btn"
+                class="btn primary-btn"
+            >
+                Search
+            </button>
+
+        </div>
+
+
+
+        <!-- =========================
+             FILTER
+        ========================== -->
+
+        <div class="filter-container">
+
+            <label for="skill-filter">
+                Filter by skill:
+            </label>
+
+            <select id="skill-filter">
+
+                <option value="all">
+                    All Skills
+                </option>
+
+                <option value="HTML">
+                    HTML
+                </option>
+
+                <option value="CSS">
+                    CSS
+                </option>
+
+                <option value="JavaScript">
+                    JavaScript
+                </option>
+
+                <option value="Python">
+                    Python
+                </option>
+
+                <option value="React">
+                    React
+                </option>
+
+                <option value="UI/UX">
+                    UI/UX
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <!-- =========================
+             USER RESULTS
+        ========================== -->
+
+        <section class="browse-results">
+
+            <div class="results-header">
+
+                <h2>
+                    Skill Partners
+                </h2>
+
+                <p id="results-count">
+                    0 people found
+                </p>
+
+            </div>
+
+
+            <!-- JavaScript will add cards here -->
+
+            <div
+                id="users-container"
+                class="users-grid"
+            >
+
+            </div>
+
+
+            <!-- No Results -->
+
+            <div
+                id="no-results"
+                class="no-results"
+                style="display: none;"
+            >
+
+                <h3>
+                    No skill partners found
+                </h3>
+
+                <p>
+                    Try searching for another skill or name.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script src="../JAVASCRIPT/browse.js"></script>
+
+</body>
+
+</html>

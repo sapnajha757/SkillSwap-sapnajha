@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | SkillSwap</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/navbar.css">
+    <link rel="stylesheet" href="../CSS/components.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Skill<span>Swap</span>
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="browse.html">
+                Browse Skills
+            </a>
+
+            <a href="signup.html" class="nav-btn">
+                Get Started
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================
+         LOGIN SECTION
+    ========================== -->
+
+    <main class="auth-section">
+
+        <div class="auth-container">
+
+
+            <!-- Header -->
+
+            <div class="auth-header">
+
+                <p class="auth-tagline">
+                    WELCOME BACK
+                </p>
+
+                <h1>
+                    Login to <span>SkillSwap</span>
+                </h1>
+
+                <p>
+                    Continue learning, teaching and connecting
+                    with your skill partners.
+                </p>
+
+            </div>
+
+
+
+            <!-- Login Form -->
+
+            <form id="login-form">
+
+
+                <!-- Email -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- Password -->
+
+                <div class="form-group">
+
+                    <div class="password-label">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <a href="#" class="forgot-password">
+                            Forgot password?
+                        </a>
+
+                    </div>
+
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- Remember Me -->
+
+                <div class="remember-me">
+
+                    <input
+                        type="checkbox"
+                        id="remember"
+                        name="remember"
+                    >
+
+                    <label for="remember">
+                        Remember me
+                    </label>
+
+                </div>
+
+
+
+                <!-- Login Button -->
+
+                <button
+                    type="submit"
+                    class="btn primary-btn auth-btn"
+                >
+                    Login
+                </button>
+
+
+                <!-- Error / Success Message -->
+
+                <p id="auth-message"></p>
+
+
+            </form>
+
+
+
+            <!-- Divider -->
+
+            <div class="auth-divider">
+
+                <span>OR</span>
+
+            </div>
+
+
+
+            <!-- Signup -->
+
+            <div class="auth-footer">
+
+                <p>
+                    Don't have an account?
+                    <a href="signup.html">
+                        Create an account
+                    </a>
+                </p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- JavaScript -->
+
+    <script src="../JAVASCRIPT/auth.js"></script>
+
+</body>
+
+</html>
