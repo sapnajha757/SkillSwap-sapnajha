@@ -90,10 +90,6 @@ section {
 }
 
 
-/* =========================
-   PROBLEM SECTION
-========================= */
-
 .problem {
     text-align: center;
 }
@@ -111,9 +107,6 @@ section {
 }
 
 
-/* =========================
-   HOW IT WORKS
-========================= */
 
 .how-it-works {
     background-color: #f8fafc;
@@ -150,10 +143,6 @@ section {
 }
 
 
-/* =========================
-   FOOTER
-========================= */
-
 footer {
     padding: 25px;
     text-align: center;
@@ -161,10 +150,6 @@ footer {
     color: white;
 }
 
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media (max-width: 800px) {
 
