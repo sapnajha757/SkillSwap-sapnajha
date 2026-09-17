@@ -3,7 +3,7 @@
 // ==================================================
 
 // Replace placeholders with your actual Supabase credentials from Project Settings > API
-const SUPABASE_URL = "https://supabase.com/dashboard/project/rvhtmresjmhjhtaflkfh";
+const SUPABASE_URL = "https://rvhtmresjmhjhtaflkfh.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ2aHRtcmVzam1oamh0YWZsa2ZoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk2NDkyMDYsImV4cCI6MjEwNTIyNTIwNn0.WUWADZAotBc917hpfc-9XXS6M6bnApKAkJC11Z87KNM";
 
 const supabaseClient = (typeof supabase !== "undefined")
