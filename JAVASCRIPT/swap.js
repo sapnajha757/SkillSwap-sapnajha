@@ -11,18 +11,20 @@ document.addEventListener("DOMContentLoaded", async function () {
     const swapForm = document.getElementById("swap-form");
     const receiverNameEl = document.getElementById("receiver-name");
     const receiverLocationEl = document.getElementById("receiver-location");
-    const learnSkillSelect = document.getElementById("learn-skill");
-    const teachSkillSelect = document.getElementById("teach-skill");
+    const learnSkillInput = document.getElementById("learn-skill");
+    const teachSkillInput = document.getElementById("teach-skill");
     const messageInput = document.getElementById("swap-message");
     const statusMessage = document.getElementById("swap-message-status");
 
-    // Get Target Partner ID from URL Parameters
+    // Get Target Partner Info from URL Parameters
     const urlParams = new URLSearchParams(window.location.search);
     const receiverId = urlParams.get("user_id");
+    const paramName = urlParams.get("name");
+    const paramLocation = urlParams.get("location");
+    const paramTeach = urlParams.get("teach");
+    const paramLearn = urlParams.get("learn");
 
-    let receiverProfile = null;
-
-    // Load Partner Profile & Options
+    // Load Partner Profile & Skill Options
     async function initSwapPage() {
         if (!receiverId) {
             if (statusMessage) {
@@ -32,56 +34,65 @@ document.addEventListener("DOMContentLoaded", async function () {
             return;
         }
 
-        try {
-            // Fetch Receiver Profile & Skills
-            const { data: profile, error: pError } = await supabaseClient
-                .from("profiles")
-                .select("*, skills(*)")
-                .eq("id", receiverId)
-                .single();
+        // Set name and location from URL parameters or default fallback
+        if (receiverNameEl) receiverNameEl.textContent = paramName || "Aarav Sharma";
+        if (receiverLocationEl) receiverLocationEl.textContent = paramLocation || "Delhi, India";
 
-            if (pError || !profile) {
-                console.error("Receiver profile error:", pError);
-                if (statusMessage) {
-                    statusMessage.textContent = "Could not load target user profile.";
-                    statusMessage.style.color = "red";
+        let partnerTeachSkills = paramTeach ? paramTeach.split(",") : ["HTML", "CSS", "JavaScript"];
+
+        // Try to fetch live user profile from Supabase if not a demo ID
+        if (supabaseClient && !receiverId.startsWith("demo-")) {
+            try {
+                const { data: profile } = await supabaseClient
+                    .from("profiles")
+                    .select("*, skills(*)")
+                    .eq("id", receiverId)
+                    .maybeSingle();
+
+                if (profile) {
+                    if (receiverNameEl) receiverNameEl.textContent = profile.full_name || paramName;
+                    if (receiverLocationEl) receiverLocationEl.textContent = profile.location || paramLocation;
+                    const dbTeach = (profile.skills || [])
+                        .filter(s => s.skill_type === "teach")
+                        .map(s => s.skill_name);
+                    if (dbTeach.length > 0) partnerTeachSkills = dbTeach;
                 }
-                return;
+            } catch (err) {
+                console.log("Using URL parameters for partner details.");
             }
+        }
 
-            receiverProfile = profile;
-            if (receiverNameEl) receiverNameEl.textContent = profile.full_name || "Skill Partner";
-            if (receiverLocationEl) receiverLocationEl.textContent = profile.location || "Location unavailable";
+        // Populate Learn Skills datalist (what partner can teach)
+        const learnSkillsList = document.getElementById("learn-skills-list");
+        if (learnSkillsList) {
+            learnSkillsList.innerHTML = partnerTeachSkills
+                .map(s => `<option value="${s.trim()}">`)
+                .join("");
+        }
 
-            // Fetch Sender Skills
-            const { data: mySkills, error: mySkillsError } = await supabaseClient
-                .from("skills")
-                .select("*")
-                .eq("user_id", currentUser.id);
+        // Fetch Current User's skills for Teach datalist
+        if (supabaseClient) {
+            try {
+                const { data: mySkills } = await supabaseClient
+                    .from("skills")
+                    .select("*")
+                    .eq("user_id", currentUser.id);
 
-            // Populate Learn Skills datalist suggestions
-            const learnSkillsList = document.getElementById("learn-skills-list");
-            if (learnSkillsList && profile.skills) {
-                const receiverTeachSkills = profile.skills.filter(s => s.skill_type === "teach");
-                if (receiverTeachSkills.length > 0) {
-                    learnSkillsList.innerHTML = receiverTeachSkills
-                        .map(s => `<option value="${s.skill_name}">`)
-                        .join("");
+                const teachSkillsList = document.getElementById("teach-skills-list");
+                if (teachSkillsList && mySkills) {
+                    const myTeach = mySkills
+                        .filter(s => s.skill_type === "teach")
+                        .map(s => s.skill_name);
+
+                    if (myTeach.length > 0) {
+                        teachSkillsList.innerHTML = myTeach
+                            .map(s => `<option value="${s}">`)
+                            .join("");
+                    }
                 }
+            } catch (err) {
+                console.error("Error loading user teach skills:", err);
             }
-
-            // Populate Teach Skills datalist suggestions
-            const teachSkillsList = document.getElementById("teach-skills-list");
-            if (teachSkillsList && mySkills) {
-                const myTeachSkills = mySkills.filter(s => s.skill_type === "teach");
-                if (myTeachSkills.length > 0) {
-                    teachSkillsList.innerHTML = myTeachSkills
-                        .map(s => `<option value="${s.skill_name}">`)
-                        .join("");
-                }
-            }
-        } catch (err) {
-            console.error("Error initializing swap page:", err);
         }
     }
 
@@ -97,13 +108,13 @@ document.addEventListener("DOMContentLoaded", async function () {
                 return;
             }
 
-            const learnSkill = learnSkillSelect ? learnSkillSelect.value : "";
-            const teachSkill = teachSkillSelect ? teachSkillSelect.value : "";
+            const learnSkill = learnSkillInput ? learnSkillInput.value.trim() : "";
+            const teachSkill = teachSkillInput ? teachSkillInput.value.trim() : "";
             const messageText = messageInput ? messageInput.value.trim() : "";
 
             if (!learnSkill || !teachSkill) {
                 if (statusMessage) {
-                    statusMessage.textContent = "Please select both skills for the swap.";
+                    statusMessage.textContent = "Please fill in both skills for the swap.";
                     statusMessage.style.color = "red";
                 }
                 return;
@@ -115,7 +126,19 @@ document.addEventListener("DOMContentLoaded", async function () {
             }
 
             try {
-                const { data, error } = await supabaseClient
+                // If demo user ID, simulate successful request insert
+                if (receiverId.startsWith("demo-")) {
+                    setTimeout(() => {
+                        if (statusMessage) {
+                            statusMessage.textContent = `Swap request sent to ${paramName || 'partner'} successfully!`;
+                            statusMessage.style.color = "green";
+                        }
+                        swapForm.reset();
+                    }, 500);
+                    return;
+                }
+
+                const { error } = await supabaseClient
                     .from("swap_requests")
                     .insert({
                         sender_id: currentUser.id,
@@ -124,8 +147,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                         will_teach: teachSkill,
                         message: messageText,
                         status: "pending"
-                    })
-                    .select();
+                    });
 
                 if (error) {
                     throw error;

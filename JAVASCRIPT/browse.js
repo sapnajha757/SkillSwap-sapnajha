@@ -1,6 +1,49 @@
 // ==================================================
-// SKILLSWAP - BROWSE MODULE (SUPABASE CONNECTED)
+// SKILLSWAP - BROWSE MODULE (MOCK DATA + SUPABASE)
 // ==================================================
+
+const demoUsers = [
+    {
+        id: "demo-1",
+        name: "Aarav Sharma",
+        location: "Delhi, India",
+        bio: "Frontend Developer & B.Tech student. Passionate about Web Dev and teaching beginners.",
+        teach: ["HTML", "CSS", "JavaScript"],
+        learn: ["Python", "React", "Hybrid RAG"]
+    },
+    {
+        id: "demo-2",
+        name: "Priya Singh",
+        location: "Noida, India",
+        bio: "UI/UX Designer with experience in Figma, Wireframing, and Design Systems.",
+        teach: ["UI/UX", "Figma", "CSS"],
+        learn: ["JavaScript", "React"]
+    },
+    {
+        id: "demo-3",
+        name: "Rahul Verma",
+        location: "Ghaziabad, India",
+        bio: "Backend developer who loves Python, Algorithms, and Database Management.",
+        teach: ["Python", "DSA", "SQL"],
+        learn: ["JavaScript", "Node.js"]
+    },
+    {
+        id: "demo-4",
+        name: "Ananya Gupta",
+        location: "Lucknow, India",
+        bio: "Creative Designer exploring web development & interactive UI components.",
+        teach: ["UI/UX", "Figma", "Graphic Design"],
+        learn: ["HTML", "CSS"]
+    },
+    {
+        id: "demo-5",
+        name: "Kabir Khan",
+        location: "Mumbai, India",
+        bio: "React & Node.js Developer willing to teach modern JS and learn AI/ML.",
+        teach: ["React", "JavaScript", "Node.js"],
+        learn: ["Python", "Machine Learning"]
+    }
+];
 
 document.addEventListener("DOMContentLoaded", async function () {
     const usersContainer = document.getElementById("users-container");
@@ -13,48 +56,49 @@ document.addEventListener("DOMContentLoaded", async function () {
     let usersList = [];
     const currentUser = await getCurrentUser();
 
-    // 1. Fetch Profiles & Skills from Supabase
+    // 1. Fetch Real Profiles from Supabase & Merge with Mock Data
     async function fetchSkillPartners() {
-        if (!supabaseClient) return;
+        let dbUsers = [];
 
-        try {
-            const { data: profiles, error } = await supabaseClient
-                .from("profiles")
-                .select("*, skills(*)");
+        if (supabaseClient) {
+            try {
+                const { data: profiles, error } = await supabaseClient
+                    .from("profiles")
+                    .select("*, skills(*)");
 
-            if (error) {
-                console.error("Error fetching profiles:", error);
-                return;
+                if (!error && profiles) {
+                    dbUsers = profiles
+                        .filter(p => !currentUser || p.id !== currentUser.id)
+                        .map(p => {
+                            const teachSkills = (p.skills || [])
+                                .filter(s => s.skill_type === "teach")
+                                .map(s => s.skill_name);
+
+                            const learnSkills = (p.skills || [])
+                                .filter(s => s.skill_type === "learn")
+                                .map(s => s.skill_name);
+
+                            return {
+                                id: p.id,
+                                name: p.full_name || "SkillSwap User",
+                                location: p.location || "Delhi, India",
+                                bio: p.bio || "SkillSwap Member exploring new skills.",
+                                teach: teachSkills.length > 0 ? teachSkills : ["HTML", "CSS"],
+                                learn: learnSkills.length > 0 ? learnSkills : ["Python", "React"]
+                            };
+                        });
+                }
+            } catch (err) {
+                console.error("Supabase fetch error, using demo users:", err);
             }
-
-            usersList = (profiles || [])
-                .filter(p => !currentUser || p.id !== currentUser.id)
-                .map(p => {
-                    const teachSkills = (p.skills || [])
-                        .filter(s => s.skill_type === "teach")
-                        .map(s => s.skill_name);
-
-                    const learnSkills = (p.skills || [])
-                        .filter(s => s.skill_type === "learn")
-                        .map(s => s.skill_name);
-
-                    return {
-                        id: p.id,
-                        name: p.full_name || "SkillSwap User",
-                        location: p.location || "Location not specified",
-                        bio: p.bio || "No bio available.",
-                        teach: teachSkills.length > 0 ? teachSkills : ["General Skills"],
-                        learn: learnSkills.length > 0 ? learnSkills : ["General Skills"]
-                    };
-                });
-
-            displayUsers(usersList);
-        } catch (err) {
-            console.error("Unexpected error fetching browse users:", err);
         }
+
+        // Combine DB profiles with Demo mock profiles
+        usersList = [...dbUsers, ...demoUsers];
+        displayUsers(usersList);
     }
 
-    // 2. Render User Cards into DOM
+    // 2. Render Cards into DOM
     function displayUsers(list) {
         if (!usersContainer) return;
         usersContainer.innerHTML = "";
@@ -117,12 +161,19 @@ document.addEventListener("DOMContentLoaded", async function () {
                 learnSkillsDiv.appendChild(tag);
             });
 
-            // Swap Request / Profile Button
+            // Action Button: Redirect to swap-request.html with user details
             const button = document.createElement("button");
             button.classList.add("btn", "primary-btn", "profile-btn");
             button.textContent = "Send Swap Request";
             button.addEventListener("click", function () {
-                window.location.href = `swap-request.html?user_id=${user.id}`;
+                const queryParams = new URLSearchParams({
+                    user_id: user.id,
+                    name: user.name,
+                    location: user.location,
+                    teach: user.teach.join(","),
+                    learn: user.learn.join(",")
+                });
+                window.location.href = `swap-request.html?${queryParams.toString()}`;
             });
 
             card.appendChild(avatar);
