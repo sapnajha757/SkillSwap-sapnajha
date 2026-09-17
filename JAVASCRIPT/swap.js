@@ -59,21 +59,25 @@ document.addEventListener("DOMContentLoaded", async function () {
                 .select("*")
                 .eq("user_id", currentUser.id);
 
-            // Populate Learn Skills dropdown (skills receiver can teach)
-            if (learnSkillSelect) {
-                const receiverTeachSkills = (profile.skills || []).filter(s => s.skill_type === "teach");
+            // Populate Learn Skills datalist suggestions
+            const learnSkillsList = document.getElementById("learn-skills-list");
+            if (learnSkillsList && profile.skills) {
+                const receiverTeachSkills = profile.skills.filter(s => s.skill_type === "teach");
                 if (receiverTeachSkills.length > 0) {
-                    learnSkillSelect.innerHTML = `<option value="">Select a skill</option>` +
-                        receiverTeachSkills.map(s => `<option value="${s.skill_name}">${s.skill_name}</option>`).join("");
+                    learnSkillsList.innerHTML = receiverTeachSkills
+                        .map(s => `<option value="${s.skill_name}">`)
+                        .join("");
                 }
             }
 
-            // Populate Teach Skills dropdown (skills sender can teach)
-            if (teachSkillSelect && mySkills) {
+            // Populate Teach Skills datalist suggestions
+            const teachSkillsList = document.getElementById("teach-skills-list");
+            if (teachSkillsList && mySkills) {
                 const myTeachSkills = mySkills.filter(s => s.skill_type === "teach");
                 if (myTeachSkills.length > 0) {
-                    teachSkillSelect.innerHTML = `<option value="">Select a skill</option>` +
-                        myTeachSkills.map(s => `<option value="${s.skill_name}">${s.skill_name}</option>`).join("");
+                    teachSkillsList.innerHTML = myTeachSkills
+                        .map(s => `<option value="${s.skill_name}">`)
+                        .join("");
                 }
             }
         } catch (err) {
