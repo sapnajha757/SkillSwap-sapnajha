@@ -1,107 +1,69 @@
-// ======================================
-// SKILLSWAP - RATINGS
-// ======================================
+// ==================================================
+// SKILLSWAP - RATINGS MODULE (SUPABASE CONNECTED)
+// ==================================================
 
+document.addEventListener("DOMContentLoaded", async function () {
+    // Require Authentication
+    const currentUser = await requireAuth();
+    if (!currentUser) return;
 
-// Get form
-const ratingForm =
-    document.getElementById("rating-form");
+    const ratingForm = document.getElementById("rating-form");
+    const ratingSelect = document.getElementById("rating");
+    const reviewTextarea = document.getElementById("review");
+    const messageEl = document.getElementById("rating-message");
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const partnerId = urlParams.get("partner_id");
+    const swapId = urlParams.get("swap_id");
 
-// Form submit
-ratingForm.addEventListener(
-    "submit",
-    function (event) {
+    if (ratingForm) {
+        ratingForm.addEventListener("submit", async function (event) {
+            event.preventDefault();
 
-        // Page reload prevent
-        event.preventDefault();
+            const ratingValue = ratingSelect ? ratingSelect.value : "";
+            const reviewText = reviewTextarea ? reviewTextarea.value.trim() : "";
 
+            if (!ratingValue) {
+                if (messageEl) {
+                    messageEl.textContent = "Please select a rating.";
+                    messageEl.style.color = "red";
+                }
+                return;
+            }
 
-        // Get rating
-        const rating =
-            document.getElementById("rating").value;
+            if (messageEl) {
+                messageEl.textContent = "Submitting rating...";
+                messageEl.style.color = "#0056b3";
+            }
 
+            try {
+                const { error } = await supabaseClient
+                    .from("ratings")
+                    .insert({
+                        swap_id: swapId || null,
+                        reviewer_id: currentUser.id,
+                        reviewee_id: partnerId || currentUser.id,
+                        rating: parseInt(ratingValue, 10),
+                        review: reviewText
+                    });
 
-        // Get review
-        const review =
-            document.getElementById("review").value.trim();
+                if (error) {
+                    throw error;
+                }
 
+                if (messageEl) {
+                    messageEl.textContent = "Rating submitted successfully! Thank you for building trust.";
+                    messageEl.style.color = "green";
+                }
 
-        // Partner
-        const partner =
-            "Aarav Sharma";
-
-
-        // ==================================
-        // CREATE RATING OBJECT
-        // ==================================
-
-        const ratingData = {
-
-            id: Date.now(),
-
-            reviewer: "Current User",
-
-            partner: partner,
-
-            rating: Number(rating),
-
-            review: review,
-
-            createdAt: new Date().toISOString()
-
-        };
-
-
-        // ==================================
-        // GET OLD RATINGS
-        // ==================================
-
-        let ratings =
-            JSON.parse(
-                localStorage.getItem(
-                    "skillswapRatings"
-                )
-            ) || [];
-
-
-        // ==================================
-        // ADD NEW RATING
-        // ==================================
-
-        ratings.push(ratingData);
-
-
-        // ==================================
-        // SAVE RATINGS
-        // ==================================
-
-        localStorage.setItem(
-            "skillswapRatings",
-            JSON.stringify(ratings)
-        );
-
-
-        // ==================================
-        // SUCCESS MESSAGE
-        // ==================================
-
-        const message =
-            document.getElementById(
-                "rating-message"
-            );
-
-
-        message.textContent =
-            "Rating submitted successfully!";
-
-
-        message.style.color =
-            "green";
-
-
-        // Reset form
-        ratingForm.reset();
-
+                ratingForm.reset();
+            } catch (err) {
+                console.error("Error submitting rating:", err);
+                if (messageEl) {
+                    messageEl.textContent = "Failed to submit rating: " + err.message;
+                    messageEl.style.color = "red";
+                }
+            }
+        });
     }
-);
+});
