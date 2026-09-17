@@ -85,15 +85,36 @@ document.addEventListener("DOMContentLoaded", async function () {
             const learnSkills = learnRaw.split(",").map(s => s.trim()).filter(s => s !== "");
 
             try {
-                // Upsert Profile Record
-                const { error: updateProfileError } = await supabaseClient
+                // Check if profile exists
+                const { data: existingProfile } = await supabaseClient
                     .from("profiles")
-                    .upsert({
-                        id: currentUser.id,
-                        full_name: name,
-                        bio: bio,
-                        location: location
-                    });
+                    .select("id")
+                    .eq("id", currentUser.id)
+                    .maybeSingle();
+
+                let updateProfileError = null;
+
+                if (existingProfile) {
+                    const { error } = await supabaseClient
+                        .from("profiles")
+                        .update({
+                            full_name: name,
+                            bio: bio,
+                            location: location
+                        })
+                        .eq("id", currentUser.id);
+                    updateProfileError = error;
+                } else {
+                    const { error } = await supabaseClient
+                        .from("profiles")
+                        .insert({
+                            id: currentUser.id,
+                            full_name: name,
+                            bio: bio,
+                            location: location
+                        });
+                    updateProfileError = error;
+                }
 
                 if (updateProfileError) {
                     throw updateProfileError;
