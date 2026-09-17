@@ -18,6 +18,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     const profileEmailHeader = document.getElementById("profile-email");
     const messageEl = document.getElementById("profile-message");
 
+    const profileAvatar = document.querySelector(".profile-avatar");
+
     // 2. Load User Profile & Skills from Supabase
     async function loadProfile() {
         try {
@@ -42,10 +44,13 @@ document.addEventListener("DOMContentLoaded", async function () {
                 console.error("Error fetching skills:", skillsError);
             }
 
-            // Populate Headers
+            // Populate Headers & Avatar Initial
             const fullName = (profile && profile.full_name) || currentUser.user_metadata?.full_name || "SkillSwap User";
             if (profileNameHeader) profileNameHeader.textContent = fullName;
             if (profileEmailHeader) profileEmailHeader.textContent = currentUser.email || "";
+            if (profileAvatar && fullName) {
+                profileAvatar.textContent = fullName.trim().charAt(0).toUpperCase();
+            }
 
             // Populate Form Inputs
             if (nameInput) nameInput.value = fullName;
@@ -150,8 +155,11 @@ document.addEventListener("DOMContentLoaded", async function () {
                     }
                 }
 
-                // Update Header
+                // Update Header & Avatar
                 if (profileNameHeader) profileNameHeader.textContent = name;
+                if (profileAvatar && name) {
+                    profileAvatar.textContent = name.trim().charAt(0).toUpperCase();
+                }
 
                 if (messageEl) {
                     messageEl.textContent = "Profile saved successfully!";
